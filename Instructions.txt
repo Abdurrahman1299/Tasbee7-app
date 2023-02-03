@@ -1,0 +1,2 @@
+droplist to choose the tasbee7 type
+celebrate when reaching the 100 tasbee7 by viewing a componenet with a message and a returning button to get back to the tasbee7 process
