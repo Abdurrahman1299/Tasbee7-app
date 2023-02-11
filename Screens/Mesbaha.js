@@ -1,47 +1,53 @@
-import {
-  ImageBackground,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
+import { blueColor, darkGrey, lightGrey } from "../assets/constants";
+import { SelectList } from "react-native-dropdown-select-list";
 
 const Mesbaha = () => {
-  const [counts, setCounts] = useState(99);
+  const [counts, setCounts] = useState(0);
+  const [selected, setSelected] = useState("");
 
-  const countComponent = () => {
-    if (counts == 100) {
-      return <Text style={styles.oneHundred}>{counts}</Text>;
-    } else if (counts == 200) {
-      return <Text style={styles.twoHundred}>{counts}</Text>;
-    } else {
-      return <Text style={styles.ordinary}>{counts}</Text>;
-    }
-  };
+  const data = [
+    { key: "1", value: "سبحان الله" },
+    { key: "2", value: "الحمد لله" },
+    { key: "3", value: "لا إله إلا الله" },
+    { key: "4", value: "الله أكبر" },
+    { key: "5", value: "لا حول ولا قوة إلا بالله" },
+    { key: "6", value: "أستغفر الله" },
+    { key: "7", value: "سبحان الله وبحمده سبحان الله العظيم" },
+  ];
 
   return (
-    <ImageBackground
-      style={styles.background}
-      source={require("../img/background.jpg")}
-      resizeMode="cover"
-      opacity={0.72}
-    >
-      <View style={styles.container}>
-        {countComponent()}
-        <View>
-          <Pressable onPress={() => setCounts(counts + 1)}>
-            <Text style={styles.button}>Count</Text>
-          </Pressable>
-          <Pressable onPress={() => setCounts(counts - 1)}>
-            <Text style={styles.button}>minus</Text>
-          </Pressable>
-          <Pressable onPress={() => setCounts(0)}>
-            <Text style={styles.button}>Reset</Text>
-          </Pressable>
-        </View>
+    <View style={styles.container}>
+      <View>
+        <SelectList
+          setSelected={(val) => setSelected(val)}
+          data={data}
+          save="value"
+          search={false}
+          defaultOption={{ key: "1", value: "سبحان الله" }}
+          boxStyles={{
+            width: 240,
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+          inputStyles={{ fontSize: 20, fontWeight: "bold" }}
+          dropdownTextStyles={{ fontSize: 16 }}
+          maxHeight={140}
+        />
       </View>
-    </ImageBackground>
+      <View style={styles.counts}>
+        <Text style={styles.text}>{counts}</Text>
+      </View>
+      <View style={styles.buttons}>
+        <Pressable onPress={() => setCounts(0)}>
+          <Text style={styles.button}>إعادة</Text>
+        </Pressable>
+        <Pressable onPress={() => setCounts(counts + 1)}>
+          <Text style={styles.button}>سبّح</Text>
+        </Pressable>
+      </View>
+    </View>
   );
 };
 
@@ -54,30 +60,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
   },
-  background: {
-    flex: 1,
+  counts: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 240,
+    width: 240,
+    borderRadius: 120,
+    backgroundColor: blueColor,
   },
-  ordinary: {
-    fontSize: 32,
-    color: "gold",
+  text: {
+    fontSize: 44,
+    color: darkGrey,
   },
-  oneHundred: {
-    fontSize: 32,
-    color: "silver",
-  },
-  twoHundred: {
-    fontSize: 32,
-    color: "tomato",
-    fontWeight: "bold",
+  buttons: {
+    flexDirection: "row",
   },
   button: {
-    marginTop: 18,
+    marginHorizontal: 8,
     paddingVertical: 10,
     paddingHorizontal: 32,
     borderRadius: 8,
-    backgroundColor: "black",
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 25,
+    borderWidth: 1.25,
+    color: darkGrey,
+    fontSize: 28,
   },
 });
