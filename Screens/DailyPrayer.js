@@ -1,4 +1,10 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { blueColor } from "../assets/constants";
 
@@ -27,6 +33,8 @@ const days = [
   "السبت",
 ];
 
+const prayers = ["الفجر", "الظهر", "العصر", "المغرب", "العشاء"];
+
 const Salat = () => {
   return (
     <View style={styles.container}>
@@ -38,7 +46,7 @@ const Salat = () => {
         </Text>
       </View>
       <View>
-        <View style={styles.salatContainer}>
+        <View style={styles.prayersContainer}>
           <View style={{ flexDirection: "row" }}>
             <BouncyCheckbox
               size={30}
@@ -48,7 +56,7 @@ const Salat = () => {
           </View>
           <Text style={styles.salatText}>الفجر</Text>
         </View>
-        <View style={styles.salatContainer}>
+        <View style={styles.prayersContainer}>
           <View style={{ flexDirection: "row" }}>
             <BouncyCheckbox
               size={30}
@@ -58,7 +66,7 @@ const Salat = () => {
           </View>
           <Text style={styles.salatText}>الظهر</Text>
         </View>
-        <View style={styles.salatContainer}>
+        <View style={styles.prayersContainer}>
           <View style={{ flexDirection: "row" }}>
             <BouncyCheckbox
               size={30}
@@ -68,7 +76,7 @@ const Salat = () => {
           </View>
           <Text style={styles.salatText}>العصر</Text>
         </View>
-        <View style={styles.salatContainer}>
+        <View style={styles.prayersContainer}>
           <View style={{ flexDirection: "row" }}>
             <BouncyCheckbox
               size={30}
@@ -78,7 +86,7 @@ const Salat = () => {
           </View>
           <Text style={styles.salatText}>المغرب</Text>
         </View>
-        <View style={styles.salatContainer}>
+        <View style={styles.prayersContainer}>
           <View style={{ flexDirection: "row" }}>
             <BouncyCheckbox
               size={30}
@@ -89,14 +97,15 @@ const Salat = () => {
           <Text style={styles.salatText}>العشاء</Text>
         </View>
       </View>
-      <Pressable
+      <TouchableOpacity
+        activeOpacity={0.7}
         style={styles.button}
         onPress={() => {
           console.log("hi");
         }}
       >
-        <Text style={styles.buttonText}>الصلوات فى الشهر</Text>
-      </Pressable>
+        <Text style={styles.buttonText}>الصلوات الفائتة</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -105,14 +114,14 @@ export default Salat;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0.8,
     justifyContent: "space-evenly",
     alignItems: "center",
   },
   dateText: {
     fontSize: 32,
   },
-  salatContainer: {
+  prayersContainer: {
     marginVertical: 8,
     flexDirection: "row",
     borderRadius: 4,
@@ -132,6 +141,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 24,
+    color: "#fff",
+    fontWeight: "bold",
   },
 });

@@ -1,6 +1,13 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useState } from "react";
-import { blueColor, darkGrey, lightGrey } from "../assets/constants";
+import { blueColor, darkGrey, lightGrey, redColor } from "../assets/constants";
 import { SelectList } from "react-native-dropdown-select-list";
 
 const Mesbaha = () => {
@@ -31,7 +38,7 @@ const Mesbaha = () => {
             justifyContent: "space-between",
             alignItems: "center",
           }}
-          inputStyles={{ fontSize: 20, fontWeight: "bold" }}
+          inputStyles={{ fontSize: 20, fontWeight: "bold", color: darkGrey }}
           dropdownTextStyles={{ fontSize: 16 }}
           maxHeight={140}
         />
@@ -40,12 +47,24 @@ const Mesbaha = () => {
         <Text style={styles.text}>{counts}</Text>
       </View>
       <View style={styles.buttons}>
-        <Pressable onPress={() => setCounts(0)}>
-          <Text style={styles.button}>إعادة</Text>
-        </Pressable>
-        <Pressable onPress={() => setCounts(counts + 1)}>
-          <Text style={styles.button}>سبّح</Text>
-        </Pressable>
+        <TouchableOpacity
+          pressDuration={0.1}
+          activeOpacity={0.8}
+          onPress={() => setCounts(0)}
+        >
+          <Text style={[styles.buttonText, { backgroundColor: redColor }]}>
+            إعادة
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          pressDuration={0.1}
+          activeOpacity={0.8}
+          onPress={() => setCounts(counts + 1)}
+        >
+          <Text pressDuration={0.1} style={styles.buttonText}>
+            سبِّح
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -55,7 +74,7 @@ export default Mesbaha;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0.8,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-evenly",
@@ -76,13 +95,13 @@ const styles = StyleSheet.create({
   buttons: {
     flexDirection: "row",
   },
-  button: {
+  buttonText: {
     marginHorizontal: 8,
     paddingVertical: 10,
     paddingHorizontal: 32,
     borderRadius: 8,
-    borderWidth: 1.25,
-    color: darkGrey,
+    color: "white",
     fontSize: 28,
+    backgroundColor: blueColor,
   },
 });
